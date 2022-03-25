@@ -7,9 +7,9 @@ this action will not remove them.
 
 ## Usage
 ```yaml
-- uses: garnertb/assign-team-members-to-issue@v1
+- uses: garnertb/assign-team-members-to-issue@v0
   with:
-    # Organization that team is   
+    # Organization that team is in   
     org: ''
 
     # Team name with members who should be assigned

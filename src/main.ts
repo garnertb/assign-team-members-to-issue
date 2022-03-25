@@ -11,11 +11,12 @@ async function run(): Promise<void> {
   try {
     const org: string = core.getInput('org')
     const team_slug: string = core.getInput('team')
-    const repo: string = core.getInput('repository')
+    const repository: string = core.getInput('repository')
     const issue_number: number = parseInt(core.getInput('issue_number'))
+    const [owner, repo] = repository.split('/')
 
     core.debug(
-      `Org: ${org}, team:${team_slug}, repo: ${repo}, issue_number: ${issue_number}`
+      `Org: ${org}, team:${team_slug}, repo: ${repository}, issue_number: ${issue_number}`
     )
 
     const client = newClient({auth: core.getInput('token')})
@@ -26,7 +27,7 @@ async function run(): Promise<void> {
     })
 
     const issue = await client.issues.get({
-      owner: org,
+      owner,
       repo,
       issue_number
     })
@@ -43,12 +44,12 @@ async function run(): Promise<void> {
 
     core.debug(`Members that will be assigned: ${assignees}`)
 
-    await client.issues.addAssignees({
-      owner: org,
-      repo,
-      issue_number,
-      assignees
-    })
+    // await client.issues.addAssignees({
+    //   owner,
+    //   repo,
+    //   issue_number,
+    //   assignees
+    // })
   } catch (error) {
     if (error instanceof Error) core.setFailed(error.message)
   }
