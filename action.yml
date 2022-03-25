@@ -2,7 +2,21 @@ name: 'Your name here'
 description: 'Provide a description here'
 author: 'Your name or organization here'
 inputs:
-  milliseconds: # change this
+  org:
+    required: true
+    description: 'organization name'
+  team:
+    required: true
+    description: 'the name of the team to be assigned to the issue'
+  repository:
+    required: true
+    description: 'input description here'
+    default: ${{ github.repository }}
+  token:
+    required: true
+    description: 'input description here'
+    default: ${{ github.token }}
+  issue_number:
     required: true
     description: 'input description here'
     default: 'default value if applicable'
